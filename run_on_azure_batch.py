@@ -11,7 +11,7 @@ import config
 sys.path.append('.')
 sys.path.append('..')
 
-IMAGE_NAME = 'datamindeddemo.azurecr.io/datamindeddemo/spark_on_azure_batch_demo'
+IMAGE_NAME = 'sitezeusml.azurecr.io/sitezeusml/spark_on_azure_batch_demo'
 IMAGE_VERSION = 'latest'
 
 
@@ -36,8 +36,8 @@ def create_pool(batch_service_client, container_registry, image_name, pool_id, p
             image_reference=image_ref_to_use,
             container_configuration=container_conf,
             node_agent_sku_id='batch.node.ubuntu 16.04'),
-        vm_size=pool_vm_size,
-        target_low_priority_nodes=pool_node_count)
+            vm_size=pool_vm_size,
+            target_low_priority_nodes=pool_node_count)
 
     if not skip_if_exists or not batch_service_client.pool.exists(pool_id):
         batch_service_client.pool.add(new_pool)
@@ -142,7 +142,7 @@ if __name__ == '__main__':
         create_job(batch_client, job_id, pool_id)
 
         for year in range(2001, 2009):
-            command = "python /src/airline_analytics.py --input wasbs://demo@datamindeddata.blob.core.windows.net/raw/airlines/{0}.csv.bz2 --output wasbs://demo@datamindeddata.blob.core.windows.net/aggregated/airlines/{1}.parquet" \
+            command = "python /src/airline_analytics.py --input wasbs://raw@ubermediamovement.blob.core.windows.net/airlines/{0}.csv.bz2 --output wasbs://aggregated@ubermediamovement.blob.core.windows.net/airlines/{1}.parquet" \
                 .format(year, year)
             add_task(
                 batch_service_client=batch_client,

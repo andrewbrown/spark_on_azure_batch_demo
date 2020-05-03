@@ -1,4 +1,4 @@
-FROM python:3.6
+FROM python:3.6.5
 
 # Install OpenJDK 8, and monitoring tooling
 RUN \

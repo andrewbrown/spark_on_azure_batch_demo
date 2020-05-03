@@ -23,9 +23,9 @@ def get_azure_spark_connection(storage_account_name, storage_account_key):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("-i", "--input", help="input file to parse", type=str,
-                        default="wasbs://demo@datamindeddata.blob.core.windows.net/raw/airlines/2008.csv.bz2")
+                        default="wasbs://raw@ubermediamovement.blob.core.windows.net/airlines/2008.csv.bz2")
     parser.add_argument("-o", "--output", help="result file to write", type=str,
-                        default="wasbs://demo@datamindeddata.blob.core.windows.net/aggregated/airlines/2008.parquet")
+                        default="wasbs://aggregated@ubermediamovement.blob.core.windows.net/airlines/2008.parquet")
     args = parser.parse_args()
     spark = get_azure_spark_connection(config.STORAGE_ACCOUNT_NAME, config.STORAGE_ACCOUNT_KEY)
     df = (spark.read.option("header", "true")
